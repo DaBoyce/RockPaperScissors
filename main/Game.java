@@ -85,7 +85,7 @@ public class Game implements Runnable{
 
             if (now - gameCycle >= timePerCycle){
                 gameLogic.runGame();
-                gamePanel.updateAllCompetatorLists(gameLogic.getScissorsList(), gameLogic.getRocksList(), gameLogic.getPaperList());
+                gamePanel.updateAllCompetitorLists(gameLogic.getScissorsList(), gameLogic.getRocksList(), gameLogic.getPaperList());
                 gameCycle = now;
             }
 

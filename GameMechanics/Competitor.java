@@ -1,25 +1,24 @@
 package GameMechanics;
 import java.lang.Math;
 
-public class Competator {
-    private competatorTypes type;
+public class Competitor {
+    private competitorTypes type;
     private int gridPosition;
     private int previousGridPosition;
     private int previousMoveDirection = 0;
     private int gridSizeX;
     private int gridSizeY;
-    private Competator mostRecentTarget;
-    private AwarenessGrid awarenessGrid;
+    private Competitor mostRecentTarget;
     private int mostRecentTargetGridLocation;
 
-    Competator(competatorTypes givenType, int givenGridPosition, int givenGridSizeX, int givenGridSizeY){
+    Competitor(competitorTypes givenType, int givenGridPosition, int givenGridSizeX, int givenGridSizeY){
         type = givenType;
         gridPosition = givenGridPosition;
         gridSizeX = givenGridSizeX;
         gridSizeY = givenGridSizeY;
     }
 
-    public Competator mostRecentTarget(){
+    public Competitor mostRecentTarget(){
         return mostRecentTarget();
     }
 
@@ -27,7 +26,7 @@ public class Competator {
         return mostRecentTargetGridLocation;
     }
 
-    public competatorTypes getCompetatorType(){
+    public competitorTypes getCompetitorType(){
         return type;
     }
 
@@ -53,7 +52,7 @@ public class Competator {
         return yCoordinate;
     }
 
-    public boolean setCompetatorType(competatorTypes newType){
+    public boolean setCompetitorType(competitorTypes newType){
         type = newType;
         return true;
     }
@@ -70,7 +69,7 @@ public class Competator {
         return true;
     }
 
-    public void setNewTarget(Competator newTarget){
+    public void setNewTarget(Competitor newTarget){
         mostRecentTarget = newTarget;
     }
 

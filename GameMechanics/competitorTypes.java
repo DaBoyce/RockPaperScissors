@@ -1,4 +1,4 @@
 package GameMechanics;
-public enum competatorTypes {
+public enum competitorTypes {
     Scissors, Rock, Paper
 }

@@ -1,8 +1,8 @@
 package main;
 
 import java.util.*;
-import GameMechanics.Competator;
-import GameMechanics.competatorTypes;
+import GameMechanics.Competitor;
+import GameMechanics.competitorTypes;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import Inputs.KeyboardInputs;
 
 public class GamePanel extends JPanel{
-    private final int COMPETATOR_SIZES = 15;
+    private final int Competitor_SIZES = 15;
 
     private int frames = 0;
     private long lastCheck = 0;
@@ -24,12 +24,12 @@ public class GamePanel extends JPanel{
     private boolean gameRunning = false;
     private boolean anyKeyPressed = false;
 
-    private ArrayList<Competator> scissorsList;
-    private ArrayList<Competator> rocksList;
-    private ArrayList<Competator> paperList;
+    private ArrayList<Competitor> scissorsList;
+    private ArrayList<Competitor> rocksList;
+    private ArrayList<Competitor> paperList;
     
     private boolean victorDeclared = false;
-    private competatorTypes victor;
+    private competitorTypes victor;
 
     private BufferedImage rockPicture;
     private BufferedImage paperPicture;
@@ -174,17 +174,17 @@ public class GamePanel extends JPanel{
     
     }
 
-    public void updateVictor(competatorTypes givenVictor){
+    public void updateVictor(competitorTypes givenVictor){
         victorDeclared = true;
         victor = givenVictor;
     }
 
-    public void declareVictor(Graphics g, competatorTypes victor){
+    public void declareVictor(Graphics g, competitorTypes victor){
         g.setColor(Color.BLACK);
         g.drawString(victor.toString() + " wins!", 200, 200);
     }
 
-    public void updateAllCompetatorLists(ArrayList<Competator> newScissorsList, ArrayList<Competator> newRocksList, ArrayList<Competator> newPaperList){
+    public void updateAllCompetitorLists(ArrayList<Competitor> newScissorsList, ArrayList<Competitor> newRocksList, ArrayList<Competitor> newPaperList){
         scissorsList = newScissorsList;
         rocksList = newRocksList;
         paperList = newPaperList;
@@ -201,23 +201,23 @@ public class GamePanel extends JPanel{
 
     private void paintScissorsList (Graphics g){
         g.setColor(Color.RED);
-        for (Competator competator: scissorsList){
-            g.drawImage(scissorsPicture, competator.getXCoordinate() * COMPETATOR_SIZES, competator.getYCoordinate() * COMPETATOR_SIZES, null);
+        for (Competitor Competitor: scissorsList){
+            g.drawImage(scissorsPicture, Competitor.getXCoordinate() * Competitor_SIZES, Competitor.getYCoordinate() * Competitor_SIZES, null);
             
         }
     }
 
     private void paintRocksList (Graphics g){
         g.setColor(Color.BLUE);
-        for (Competator competator: rocksList){
-            g.drawImage(rockPicture, competator.getXCoordinate() * COMPETATOR_SIZES, competator.getYCoordinate() * COMPETATOR_SIZES, null);
+        for (Competitor Competitor: rocksList){
+            g.drawImage(rockPicture, Competitor.getXCoordinate() * Competitor_SIZES, Competitor.getYCoordinate() * Competitor_SIZES, null);
         }
     }
     
     private void paintPaperList (Graphics g){
         g.setColor(Color.GREEN);
-        for (Competator competator: paperList){
-            g.drawImage(paperPicture, competator.getXCoordinate() * COMPETATOR_SIZES, competator.getYCoordinate() * COMPETATOR_SIZES, null);
+        for (Competitor Competitor: paperList){
+            g.drawImage(paperPicture, Competitor.getXCoordinate() * Competitor_SIZES, Competitor.getYCoordinate() * Competitor_SIZES, null);
         }
     }
 

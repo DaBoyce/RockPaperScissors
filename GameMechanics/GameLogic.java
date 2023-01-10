@@ -33,57 +33,57 @@ public class GameLogic {
         return rockWins;
     }
 
-    public boolean updateTotalWins(competatorTypes victor){
-        if (victor == competatorTypes.Scissors){
+    public boolean updateTotalWins(competitorTypes victor){
+        if (victor == competitorTypes.Scissors){
             scissorWins++;
             return true;
         }
-        else if (victor == competatorTypes.Rock){
+        else if (victor == competitorTypes.Rock){
             rockWins++;
             return true;
         }
-        else if (victor == competatorTypes.Paper){
+        else if (victor == competitorTypes.Paper){
             paperWins++;
             return true;
         }
         return false;
     }
 
-    public ArrayList<Competator> getScissorsList(){
+    public ArrayList<Competitor> getScissorsList(){
         return gameGrid.getScissorsList();
     }
 
-    public ArrayList<Competator> getRocksList(){
+    public ArrayList<Competitor> getRocksList(){
         return gameGrid.getRocksList();
     }
 
-    public ArrayList<Competator> getPaperList(){
+    public ArrayList<Competitor> getPaperList(){
         return gameGrid.getPaperList();
     }
 
-    public competatorTypes GameEndCondtions(){
+    public competitorTypes GameEndCondtions(){
         if (gameGrid.getTotalPaper() != 0 && gameGrid.getTotalRocks() == 0 && gameGrid.getTotalScissors() == 0){
-            return competatorTypes.Paper;
+            return competitorTypes.Paper;
         }
         else if (gameGrid.getTotalPaper() == 0 && gameGrid.getTotalRocks() != 0 && gameGrid.getTotalScissors() == 0){
-            return competatorTypes.Rock;
+            return competitorTypes.Rock;
         }
         else if (gameGrid.getTotalPaper() == 0 && gameGrid.getTotalRocks() == 0 && gameGrid.getTotalScissors() != 0){
-            return competatorTypes.Scissors;
+            return competitorTypes.Scissors;
         }
         return null;
 
     }
 
-    public void updateVictories(competatorTypes victor){
+    public void updateVictories(competitorTypes victor){
         if (gameGrid.getTotalPaper() != 0 && gameGrid.getTotalRocks() == 0 && gameGrid.getTotalScissors() == 0){
-            updateTotalWins(competatorTypes.Paper);
+            updateTotalWins(competitorTypes.Paper);
         }
         else if (gameGrid.getTotalPaper() == 0 && gameGrid.getTotalRocks() != 0 && gameGrid.getTotalScissors() == 0){
-            updateTotalWins(competatorTypes.Rock);
+            updateTotalWins(competitorTypes.Rock);
         }
         else if (gameGrid.getTotalPaper() == 0 && gameGrid.getTotalRocks() == 0 && gameGrid.getTotalScissors() != 0){
-            updateTotalWins(competatorTypes.Scissors);
+            updateTotalWins(competitorTypes.Scissors);
         }
 
     }

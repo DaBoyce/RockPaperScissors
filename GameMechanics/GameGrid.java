@@ -3,35 +3,35 @@ import java.lang.Math;
 import java.util.ArrayList;
 
 public class GameGrid {
-    private Competator[] mainGrid;
-    private ArrayList<Competator> CompetatorList;
+    private Competitor[] mainGrid;
+    private ArrayList<Competitor> CompetitorList;
     
     private int totalGridSize;
     private int gridSizeX = 25;
     private int gridSizeY = 25;
 
-    private int totalCompetators = 30;
-    private int totalScissors = totalCompetators / 3; 
-    private int totalRocks = totalCompetators / 3; 
-    private int totalPaper = totalCompetators / 3; 
+    private int totalCompetitors = 30;
+    private int totalScissors = totalCompetitors / 3; 
+    private int totalRocks = totalCompetitors / 3; 
+    private int totalPaper = totalCompetitors / 3; 
 
-    private ArrayList<Competator> scissorsList;
-    private ArrayList<Competator> rocksList;
-    private ArrayList<Competator> paperList;
+    private ArrayList<Competitor> scissorsList;
+    private ArrayList<Competitor> rocksList;
+    private ArrayList<Competitor> paperList;
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public GameGrid(){
-        mainGrid = new Competator[gridSizeX * gridSizeY];
+        mainGrid = new Competitor[gridSizeX * gridSizeY];
         totalGridSize = gridSizeX * gridSizeY;
-        CompetatorList = new ArrayList<Competator>();
+        CompetitorList = new ArrayList<Competitor>();
 
-        initializeCompetators();        
+        initializeCompetitors();        
     }
 
-    boolean initializeCompetators(){
+    boolean initializeCompetitors(){
         initializeScissors();
         initializeRock();
         initializePaper();
@@ -41,19 +41,19 @@ public class GameGrid {
 
     private void initializeScissors(){
         for (int i = 0; i < totalScissors; i++){
-            createNewCompetator(competatorTypes.Scissors, getRandomEmptyGridPosition());
+            createNewCompetitor(competitorTypes.Scissors, getRandomEmptyGridPosition());
         }
     }
 
     private void initializePaper(){
         for (int i = 0; i < totalPaper; i++){
-            createNewCompetator(competatorTypes.Paper, getRandomEmptyGridPosition());
+            createNewCompetitor(competitorTypes.Paper, getRandomEmptyGridPosition());
         }
     }
 
     private void initializeRock(){
         for (int i = 0; i < totalRocks; i++){
-            createNewCompetator(competatorTypes.Rock, getRandomEmptyGridPosition());
+            createNewCompetitor(competitorTypes.Rock, getRandomEmptyGridPosition());
         }
     }
 
@@ -75,36 +75,36 @@ public class GameGrid {
         return false;
     }
 
-    private boolean createNewCompetator(competatorTypes competatorType, int gridPosition){
-        Competator newCompetator = new Competator(competatorType, gridPosition, gridSizeX, gridSizeY);
-        updateGridPosition(gridPosition, newCompetator);
-        CompetatorList.add(newCompetator);
+    private boolean createNewCompetitor(competitorTypes CompetitorType, int gridPosition){
+        Competitor newCompetitor = new Competitor(CompetitorType, gridPosition, gridSizeX, gridSizeY);
+        updateGridPosition(gridPosition, newCompetitor);
+        CompetitorList.add(newCompetitor);
 
         return true;
     }
 
-    private boolean updateGridPosition(int position, Competator competatorToUpdate){
-        mainGrid[position] = competatorToUpdate;
+    private boolean updateGridPosition(int position, Competitor CompetitorToUpdate){
+        mainGrid[position] = CompetitorToUpdate;
         
         return true;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private boolean updateCompetatorLists(){
-        scissorsList = new ArrayList<Competator>();
-        rocksList = new ArrayList<Competator>();
-        paperList = new ArrayList<Competator>();
+    private boolean updateCompetitorLists(){
+        scissorsList = new ArrayList<Competitor>();
+        rocksList = new ArrayList<Competitor>();
+        paperList = new ArrayList<Competitor>();
         
-        for (Competator competator: CompetatorList){
-            if (competator.getCompetatorType() == competatorTypes.Scissors){
-                scissorsList.add(competator);
+        for (Competitor Competitor: CompetitorList){
+            if (Competitor.getCompetitorType() == competitorTypes.Scissors){
+                scissorsList.add(Competitor);
             }
-            if (competator.getCompetatorType() == competatorTypes.Rock){
-                rocksList.add(competator);
+            if (Competitor.getCompetitorType() == competitorTypes.Rock){
+                rocksList.add(Competitor);
             }
-            if (competator.getCompetatorType() == competatorTypes.Paper){
-                paperList.add(competator);
+            if (Competitor.getCompetitorType() == competitorTypes.Paper){
+                paperList.add(Competitor);
             }
         }
 
@@ -112,14 +112,14 @@ public class GameGrid {
     }
 
 
-    public ArrayList<Competator> getScissorsList(){
+    public ArrayList<Competitor> getScissorsList(){
         return  scissorsList;
     }
-    public ArrayList<Competator> getRocksList(){
+    public ArrayList<Competitor> getRocksList(){
         return  rocksList;
     }
     
-    public ArrayList<Competator> getPaperList(){
+    public ArrayList<Competitor> getPaperList(){
         return  paperList;
     }
 
@@ -138,70 +138,70 @@ public class GameGrid {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void cycleGrid(){
-        for (Competator competator: CompetatorList){
-            int desiredNewGridLocation = competator.getnewDesiredGridLocation();
+        for (Competitor Competitor: CompetitorList){
+            int desiredNewGridLocation = Competitor.getnewDesiredGridLocation();
             if (newGridLocationIsempty(desiredNewGridLocation)){
-                moveCompetatorToNewGridLocation(competator, desiredNewGridLocation);
+                moveCompetitorToNewGridLocation(Competitor, desiredNewGridLocation);
             }
-            else resolveConflict(mainGrid[desiredNewGridLocation], competator);
+            else resolveConflict(mainGrid[desiredNewGridLocation], Competitor);
         }
 
-        updateCompetatorLists();
+        updateCompetitorLists();
 
     }
 
-    private boolean moveCompetatorToNewGridLocation(Competator competator, int newGridLocation){
-        updateGridPosition(newGridLocation, competator);
-        competator.moveToNewGridLocation(newGridLocation);
-        updateGridPosition(competator.getPreviousGridPosition(), null);     
+    private boolean moveCompetitorToNewGridLocation(Competitor Competitor, int newGridLocation){
+        updateGridPosition(newGridLocation, Competitor);
+        Competitor.moveToNewGridLocation(newGridLocation);
+        updateGridPosition(Competitor.getPreviousGridPosition(), null);     
         
         return true;
     }
 
-    void resolveConflict(Competator Attacker, Competator Defender){
-        competatorTypes attackerType = Attacker.getCompetatorType();
-        competatorTypes defenderType = Defender.getCompetatorType();
+    void resolveConflict(Competitor Attacker, Competitor Defender){
+        competitorTypes attackerType = Attacker.getCompetitorType();
+        competitorTypes defenderType = Defender.getCompetitorType();
         
         if (attackerType == defenderType){
             return;
         }
 
-        if (attackerType == competatorTypes.Rock){
-            if (defenderType == competatorTypes.Paper){
+        if (attackerType == competitorTypes.Rock){
+            if (defenderType == competitorTypes.Paper){
                 AttackerDefeat(Attacker, Defender);
                 totalRocks--;
                 totalPaper++;
                 return;
             }
-            else if (defenderType == competatorTypes.Scissors){
+            else if (defenderType == competitorTypes.Scissors){
                 AttackerVictory(Attacker, Defender);
                 totalRocks++;
                 totalScissors--;
                 return;
             }
         }
-        else if (attackerType == competatorTypes.Paper){
-            if (defenderType == competatorTypes.Scissors){
+        else if (attackerType == competitorTypes.Paper){
+            if (defenderType == competitorTypes.Scissors){
                 AttackerDefeat(Attacker, Defender);
                 totalPaper--;
                 totalScissors++;
                 return;
             }
-            else if (defenderType == competatorTypes.Rock){
+            else if (defenderType == competitorTypes.Rock){
                 AttackerVictory(Attacker, Defender);
                 totalPaper++;
                 totalRocks--;
                 return;
             }
         }
-        else if (attackerType == competatorTypes.Scissors){
-            if (defenderType == competatorTypes.Rock){
+        else if (attackerType == competitorTypes.Scissors){
+            if (defenderType == competitorTypes.Rock){
                 AttackerDefeat(Attacker, Defender);
                 totalScissors--;
                 totalRocks++;
                 return;
             }
-            else if (defenderType == competatorTypes.Paper){
+            else if (defenderType == competitorTypes.Paper){
                 AttackerVictory(Attacker, Defender);
                 totalScissors++;
                 totalPaper--;
@@ -210,13 +210,13 @@ public class GameGrid {
         }
     }
 
-    boolean AttackerDefeat(Competator Attacker, Competator Defender){
-        Attacker.setCompetatorType(Defender.getCompetatorType());
+    boolean AttackerDefeat(Competitor Attacker, Competitor Defender){
+        Attacker.setCompetitorType(Defender.getCompetitorType());
         return true;
     }
 
-    boolean AttackerVictory(Competator Attacker, Competator Defender){
-        Defender.setCompetatorType(Attacker.getCompetatorType());
+    boolean AttackerVictory(Competitor Attacker, Competitor Defender){
+        Defender.setCompetitorType(Attacker.getCompetitorType());
         return true;
     }
 }
